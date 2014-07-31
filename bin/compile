@@ -308,7 +308,7 @@ VENDORED_PHP=/app/vendor/php
 status "Bundling NGINX ${NGINX_VERSION}"
 fetch_engine_package nginx "$NGINX_VERSION" /app/vendor/nginx | indent
 
-status "Bundling PHP ${PHP_VERSION}"
+###status "Bundling PHP ${PHP_VERSION}"
 
 # Install libraries also on build container, so PHP doesn't wayne about missing
 # dynamic libraries when running it during the slug compilation.
@@ -327,7 +327,7 @@ SH
 ###source ".profile.d/php.sh"
 
 # Fetch additional extensions
-status "Bundling extensions"
+###status "Bundling extensions"
 #echo "       apcu"
 # fetch_package "ext/$(php_api_version)/php-apcu" "/app/vendor/php" | indent
 #echo "       phpredis"
