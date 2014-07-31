@@ -422,9 +422,9 @@ pmsgr=/tmp/pmsgr
 rm -f \$pmsgr
 mkfifo \$pmsgr
 
-for var in \`env | cut -f1 -d=\`; do
-    echo "env[\$var] = \\$\${var}" >> /app/vendor/php/etc/php-fpm.conf
-done
+### for var in \`env | cut -f1 -d=\`; do
+ ###   echo "env[\$var] = \\$\${var}" >> /app/vendor/php/etc/php-fpm.conf
+### done
 
 export DOCUMENT_ROOT="$DOCUMENT_ROOT"
 export INDEX_DOCUMENT="$INDEX_DOCUMENT"
@@ -440,10 +440,10 @@ erb conf/site.conf.erb > /app/vendor/nginx/conf/site.conf
 `init_log_plex_fifo ${LOG_FILES}`
 `tail_log_plex ${LOG_FILES} ${SYS_LOG_FILES}`
 
-(
-    exec php-fpm -p "/app/vendor/php"
-    \$pmsgr < "php-fpm"
-)&
+###(
+###    exec php-fpm -p "/app/vendor/php"
+###    \$pmsgr < "php-fpm"
+###)&
 
 (
     exec nginx -p "/app/vendor/nginx" -c /app/vendor/nginx/conf/nginx.conf
