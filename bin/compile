@@ -315,7 +315,7 @@ status "Bundling PHP ${PHP_VERSION}"
 fetch_package "libicu-51" /app/vendor/libicu > /dev/null
 fetch_package "libmcrypt-${MCRYPT_VERSION}" /app/vendor/libmcrypt > /dev/null
 
-fetch_engine_package php "$PHP_VERSION" /app/vendor/php | indent
+###fetch_engine_package php "$PHP_VERSION" /app/vendor/php | indent
 
 test ! -d ".profile.d" && mkdir -p .profile.d || true
 
@@ -324,7 +324,7 @@ export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app/vendor/nginx/sbin:/app/v
 export HEROKU_BUILD_TIME=$(date +%Y%m%d%H%M%S)
 SH
 
-source ".profile.d/php.sh"
+###source ".profile.d/php.sh"
 
 # Fetch additional extensions
 status "Bundling extensions"
@@ -341,15 +341,15 @@ fi
 
 if [ -n "$BUILDPACK_DEBUG" ]; then
     ls -R /app/vendor/nginx
-    ls -R /app/vendor/php
+  ###  ls -R /app/vendor/php
 fi
 
 mkdir -p "conf"
 cp "$basedir/../conf/nginx/base.conf.erb" "conf/nginx.conf.erb"
-cp "$basedir/../conf/php/php-fpm.conf" "/app/vendor/php/etc/php-fpm.conf"
-cp "$basedir/../conf/php/php.ini" "/app/vendor/php/etc/php.ini"
+###cp "$basedir/../conf/php/php-fpm.conf" "/app/vendor/php/etc/php-fpm.conf"
+###cp "$basedir/../conf/php/php.ini" "/app/vendor/php/etc/php.ini"
 
-pear config-set php_ini /app/vendor/php/etc/php.ini &> /dev/null
+###pear config-set php_ini /app/vendor/php/etc/php.ini &> /dev/null
 
 for conf in $PHP_EXTRA_CONFIG; do
     echo "$conf" >> "/app/vendor/php/etc/php.ini"
@@ -385,7 +385,7 @@ fi
 "$FRAMEWORK" compile "$BUILD_DIR" "$CACHE_DIR"
 
 install_node_deps "$BUILD_DIR"
-install_composer_deps "$BUILD_DIR"
+###install_composer_deps "$BUILD_DIR"
 
 LOG_FILES=$(unique_array ${LOG_FILES[@]} ${USER_LOG_FILES[@]})
 if [ -n "$FRAMEWORK" ] && [ -f "$FRAMEWORK" ]; then
@@ -411,7 +411,7 @@ status "Vendoring binaries into slug"
 mv /app/vendor/libmcrypt vendor/libmcrypt
 mv /app/vendor/libicu vendor/libicu
 mv /app/vendor/nginx vendor/nginx
-mv /app/vendor/php vendor/php
+###mv /app/vendor/php vendor/php
 
 mkdir -p "bin"
 
